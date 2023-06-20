@@ -1,0 +1,6 @@
+{
+  "deployStage": "DEPLOY_STAGE",
+  "dbName": "MONGODB_USERNAME",
+  "dbPass": "MONGODB_PASSWORD",
+  "databaseName": "MONGODB_DATABASE_NAME"
+}

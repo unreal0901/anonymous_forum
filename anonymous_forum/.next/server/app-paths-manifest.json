@@ -1,0 +1,4 @@
+{
+  "/boards/[boardId]/threads/page": "app/boards/[boardId]/threads/page.js",
+  "/boards/[boardId]/threads/[threadId]/page": "app/boards/[boardId]/threads/[threadId]/page.js"
+}
