@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { v4: uuidv4 } = require("uuid");
 const { replySchema } = require("./Reply.model");
 
 const threadSchema = new mongoose.Schema({
@@ -23,7 +24,25 @@ const threadSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  threadNumber: {
+    type: String,
+    unique: true,
+  },
   replies: [replySchema],
+});
+
+// Pre-save middleware to generate threadNumber based on counter and random component
+threadSchema.pre("save", async function (next) {
+  if (!this.isNew) return next();
+
+  try {
+    const count = await Thread.countDocuments();
+    const randomComponent = uuidv4(); // Generate a random UUID using uuid
+    this.threadNumber = `T${count}-${randomComponent}`;
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 
 const Thread = mongoose.model("Thread", threadSchema);

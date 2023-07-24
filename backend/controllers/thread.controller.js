@@ -1,3 +1,4 @@
+const Board = require("../models/Board.model");
 const { getAllThreads, createThread } = require("../services/thread.service");
 
 module.exports.getAllThreadsContoller = async (req, res, next) => {
@@ -14,9 +15,13 @@ module.exports.getAllThreadsContoller = async (req, res, next) => {
 
 module.exports.createThreadController = async (req, res, next) => {
   try {
-    const { boardId, subject, user } = req.body;
+    const { boardName, subject, user } = req.body;
 
     const userIP = req.ip;
+    const board = await Board.findOne({ name: boardName });
+    console.log(board);
+    const boardId = board._id;
+    console.log(boardId);
     const thread = await createThread({
       boardId,
       subject,

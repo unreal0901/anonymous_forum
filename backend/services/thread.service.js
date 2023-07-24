@@ -1,4 +1,5 @@
 const Thread = require("../models/Thread.model");
+const AppError = require("../utils/appError");
 
 const getAllThreads = async () => {
   try {
@@ -14,6 +15,7 @@ const createThread = async (payload) => {
     const thread = await Thread.create(payload);
     return thread;
   } catch (error) {
+    console.log(error);
     throw new AppError("Failed to create thread", 400);
   }
 };

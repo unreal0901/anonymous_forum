@@ -17,6 +17,7 @@ const createReply = async (payload) => {
 
     return reply;
   } catch (error) {
+    console.log(error);
     throw new AppError("Failed to create reply", 400);
   }
 };
@@ -30,4 +31,16 @@ const getAllReplies = async () => {
   }
 };
 
-module.exports = { createReply, getAllReplies };
+const getAllChildReplies = async (parentReplyId) => {
+  try {
+    // Find all replies that have the specified parentReplyId and sort them by createdAt in ascending order
+    const childReplies = await Reply.find({ parentReplyId }).sort({
+      createdAt: 1,
+    });
+    return childReplies;
+  } catch (error) {
+    throw new Error("Failed to fetch parent Replies");
+  }
+};
+
+module.exports = { createReply, getAllReplies, getAllChildReplies };
