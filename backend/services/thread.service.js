@@ -1,3 +1,4 @@
+const Board = require("../models/Board.model");
 const Thread = require("../models/Thread.model");
 const AppError = require("../utils/appError");
 
@@ -20,4 +21,26 @@ const createThread = async (payload) => {
   }
 };
 
-module.exports = { getAllThreads, createThread };
+const getBoardThread = async (boardNumber) => {
+  try {
+    const board = await Board.findOne({ boardNumber: boardNumber });
+    const boardId = board._id;
+    const threads = await Thread.find({ boardId: boardId });
+    return threads;
+  } catch (error) {
+    console.log(error);
+    throw new AppError("Failed to fetch threads for the board");
+  }
+};
+
+const getThread = async (threadNumber) => {
+  try {
+    const thread = await Thread.findOne({ threadNumber: threadNumber });
+    return thread;
+  } catch (error) {
+    console.log(error);
+    throw new AppError("Failed to fetch the thread");
+  }
+};
+
+module.exports = { getAllThreads, createThread, getBoardThread, getThread };

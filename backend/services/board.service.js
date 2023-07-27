@@ -12,4 +12,7 @@ const getAllBoards = async () => {
   return await Board.find();
 };
 
-module.exports = { createBoard, getAllBoards };
+const getBoard = async (boardNumber) => {
+  return await Board.findOne({ boardNumber: boardNumber });
+};
+module.exports = { createBoard, getAllBoards, getBoard };

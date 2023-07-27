@@ -1,5 +1,10 @@
 const Board = require("../models/Board.model");
-const { getAllThreads, createThread } = require("../services/thread.service");
+const {
+  getAllThreads,
+  createThread,
+  getBoardThread,
+  getThread,
+} = require("../services/thread.service");
 
 module.exports.getAllThreadsContoller = async (req, res, next) => {
   try {
@@ -15,10 +20,20 @@ module.exports.getAllThreadsContoller = async (req, res, next) => {
 
 module.exports.createThreadController = async (req, res, next) => {
   try {
-    const { boardName, subject, user } = req.body;
-
+    const { boardName, subject, user, content } = req.body;
+    let tagsArray = req.body?.tags || [];
+    if (tagsArray.length > 0) {
+      tagsArray = tagsArray.map((e, i) => {
+        return { id: i, title: e };
+      });
+    }
     const userIP = req.ip;
+    console.log(userIP);
     const board = await Board.findOne({ name: boardName });
+    if (board?.threadCount) {
+      board.threadCount = (board?.threadCount || 0) + 1;
+      board.save();
+    }
     console.log(board);
     const boardId = board._id;
     console.log(boardId);
@@ -27,6 +42,8 @@ module.exports.createThreadController = async (req, res, next) => {
       subject,
       user,
       userIP,
+      tags: tagsArray,
+      content,
     });
 
     res.status(201).json({
@@ -34,6 +51,35 @@ module.exports.createThreadController = async (req, res, next) => {
       data: thread,
     });
   } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+module.exports.getBoardThreadsController = async (req, res, next) => {
+  try {
+    const { boardId } = req.query;
+    const threads = await getBoardThread(boardId);
+    res.status(200).json({
+      message: `Threads fetched for board: ${boardId}`,
+      data: threads,
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+module.exports.getThreadController = async (req, res, next) => {
+  try {
+    const { threadNumber } = req.query;
+    const thread = await getThread(threadNumber);
+    res.status(200).json({
+      message: `Thread number ${threadNumber} fetched.`,
+      data: thread,
+    });
+  } catch (error) {
+    console.log(error);
     next(error);
   }
 };

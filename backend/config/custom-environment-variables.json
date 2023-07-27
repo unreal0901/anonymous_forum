@@ -3,5 +3,6 @@
   "dbName": "MONGODB_USERNAME",
   "dbPass": "MONGODB_PASSWORD",
   "databaseName": "MONGODB_DATABASE_NAME",
+  "sessionDatabaseName": "MONGODB_SESSION_DATABASE_NAME",
   "sessionSecret": "SESSION_SECRET"
 }

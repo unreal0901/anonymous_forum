@@ -16,6 +16,15 @@ const threadSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  content: {
+    type: String,
+    default: "",
+  },
+  tags: [
+    {
+      title: String,
+    },
+  ],
   userIP: {
     type: String,
     required: true,
@@ -28,7 +37,6 @@ const threadSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  replies: [replySchema],
 });
 
 // Pre-save middleware to generate threadNumber based on counter and random component

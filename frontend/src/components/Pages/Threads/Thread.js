@@ -1,0 +1,24 @@
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useGetThreadQuery } from "../../../services/api/ThreadApi";
+import Post from "./Post";
+import Shimmer from "../../Shimmer/Shimmer";
+
+const Thread = () => {
+  const { tid } = useParams();
+  const { data, isLoading, isFetching, isError } = useGetThreadQuery(tid);
+
+  return (
+    <>
+      {isLoading || isFetching ? (
+        <div className="mt-3">
+          <Shimmer h="12rem" w="100%" />
+        </div>
+      ) : (
+        <Post postData={data} />
+      )}
+    </>
+  );
+};
+
+export default Thread;
