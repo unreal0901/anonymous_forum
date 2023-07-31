@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useGetThreadQuery } from "../../../services/api/ThreadApi";
 import Post from "./Post";
 import Shimmer from "../../Shimmer/Shimmer";
+import Replies from "./Replies";
 
 const Thread = () => {
   const { tid } = useParams();
@@ -15,7 +16,10 @@ const Thread = () => {
           <Shimmer h="12rem" w="100%" />
         </div>
       ) : (
-        <Post postData={data} />
+        <>
+          <Post postData={data} />
+          <Replies tid={tid} />
+        </>
       )}
     </>
   );

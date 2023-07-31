@@ -14,5 +14,11 @@
     "mongoose": "^7.1.1",
     "morgan": "^1.10.0",
     "uuid": "^9.0.0"
-  }
+  },
+  "engines": {
+    "node": ">=14.20.1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

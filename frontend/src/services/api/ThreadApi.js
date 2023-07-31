@@ -1,6 +1,7 @@
 import baseQuery from "../utils/customFetchBase";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { setThread, setThreads } from "../../features/Threads/ThreadSlice";
+import { boardApi } from "./BoardApi";
 
 export const threadApi = createApi({
   reducerPath: "threadApi",
@@ -72,6 +73,13 @@ export const threadApi = createApi({
         };
       },
       invalidatesTags: ["Thread"],
+      async onQueryStarted(args, { dispatch, getState, queryFulfilled }) {
+        try {
+          await queryFulfilled();
+          const state = getState();
+          dispatch(setThreads(state.threadState?.threads));
+        } catch (error) {}
+      },
       transformResponse: (result) => {
         return result?.data;
       },

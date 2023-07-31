@@ -26,6 +26,7 @@ const replySchema = new mongoose.Schema({
   },
   userIP: {
     type: String,
+    required: true,
   },
   createdAt: {
     type: Date,

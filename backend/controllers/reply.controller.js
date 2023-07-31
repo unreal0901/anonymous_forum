@@ -4,6 +4,7 @@ const {
   createReply,
   getAllReplies,
   getAllChildReplies,
+  getThreadReplies,
 } = require("../services/reply.service");
 
 module.exports.createReplyHandler = async (req, res, next) => {
@@ -20,6 +21,8 @@ module.exports.createReplyHandler = async (req, res, next) => {
       parentReplyId = parentReply._id;
     } else {
       parentReplyId = null;
+      thread.replyCount = (thread.replyCount || 0) + 1;
+      thread.save();
     }
 
     console.log(thread);
@@ -54,7 +57,20 @@ module.exports.getAllRepliesHandler = async (req, res, next) => {
   }
 };
 
-module.exports.getAllChildReplies = async (req, res, next) => {
+module.exports.getThreadRepliesHandler = async (req, res, next) => {
+  try {
+    const { threadNumber } = req.query;
+    const threadReplies = await getThreadReplies(threadNumber);
+    res.status(200).json({
+      message: `All replies fetched for thread ${threadNumber}`,
+      data: threadReplies,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports.getAllChildRepliesHandler = async (req, res, next) => {
   try {
     const parentReplyId = req.body.prId;
     const childReplies = await getAllChildReplies(parentReplyId);

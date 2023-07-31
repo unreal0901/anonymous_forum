@@ -7,9 +7,11 @@ const ThreadLayout = () => {
 
   return (
     <>
-      <div className="heading mt-2">
-        <p className="text-[2rem] text-gray-800">{threadData?.subject}</p>
-        <div className="tags flex gap-2 mt-2 mb-2">
+      <div className="heading mt-2 dark:bg-[#1E283A] dark:text-gray-400 ">
+        <p className="text-[2rem] text-gray-800 dark:text-gray-400">
+          {threadData?.subject}
+        </p>
+        <div className="tags flex gap-2 mt-2 mb-2 flex-wrap border-b border-b-black pb-2 dark:border-b-gray-400 ">
           {threadData?.tags
             ? threadData?.tags?.map((tag) => {
                 return (

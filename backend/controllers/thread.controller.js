@@ -23,14 +23,14 @@ module.exports.createThreadController = async (req, res, next) => {
     const { boardName, subject, user, content } = req.body;
     let tagsArray = req.body?.tags || [];
     if (tagsArray.length > 0) {
-      tagsArray = tagsArray.map((e, i) => {
-        return { id: i, title: e };
+      tagsArray = tagsArray.map((e) => {
+        return { title: e };
       });
     }
     const userIP = req.ip;
     console.log(userIP);
     const board = await Board.findOne({ name: boardName });
-    if (board?.threadCount) {
+    if (board) {
       board.threadCount = (board?.threadCount || 0) + 1;
       board.save();
     }
@@ -51,6 +51,7 @@ module.exports.createThreadController = async (req, res, next) => {
       data: thread,
     });
   } catch (error) {
+    console.log(error);
     console.log(error);
     next(error);
   }

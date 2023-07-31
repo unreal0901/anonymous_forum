@@ -26,6 +26,33 @@ export const boardApi = createApi({
         return result?.data;
       },
     }),
+    postBoard: builder.mutation({
+      query(payload) {
+        const { name, description, tags } = payload;
+        return {
+          url: "boards/create",
+          credentials: "include",
+          method: "POST",
+          body: {
+            name: name,
+            description: description,
+            tags: tags,
+          },
+        };
+      },
+      invalidatesTags: ["Board"],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          // dispatch(setBoards(data));
+          console.log(data);
+        } catch (error) {}
+      },
+
+      transformResponse: (result) => {
+        return result?.data;
+      },
+    }),
     getBoard: builder.query({
       query(id) {
         return {
@@ -40,6 +67,7 @@ export const boardApi = createApi({
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
+
           dispatch(setBoard(data));
         } catch (error) {}
       },
@@ -51,4 +79,5 @@ export const boardApi = createApi({
   }),
 });
 
-export const { useGetBoardsQuery, useGetBoardQuery } = boardApi;
+export const { useGetBoardsQuery, useGetBoardQuery, usePostBoardMutation } =
+  boardApi;

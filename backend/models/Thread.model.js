@@ -37,6 +37,10 @@ const threadSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  replyCount: {
+    type: Number,
+    default: 0,
+  },
 });
 
 // Pre-save middleware to generate threadNumber based on counter and random component

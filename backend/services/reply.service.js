@@ -33,4 +33,29 @@ const getAllChildReplies = async (parentReplyId) => {
   }
 };
 
-module.exports = { createReply, getAllReplies, getAllChildReplies };
+const getThreadReplies = async (threadNumber) => {
+  try {
+    const thread = await Thread.findOne({ threadNumber });
+    console.log(thread);
+    // Find all replies that have the specified parentReplyId and sort them by createdAt in ascending order
+    console.log(thread._id);
+    const threadReplies = await Reply.find({
+      threadId: thread._id,
+      parentReplyId: null,
+    }).sort({
+      createdAt: 1,
+    });
+    console.log(threadReplies);
+    return threadReplies;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to fetch parent Replies");
+  }
+};
+
+module.exports = {
+  createReply,
+  getAllReplies,
+  getAllChildReplies,
+  getThreadReplies,
+};

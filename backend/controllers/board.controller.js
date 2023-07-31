@@ -24,6 +24,7 @@ module.exports.createBoardHandler = async (req, res, next) => {
       data: board,
     });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };

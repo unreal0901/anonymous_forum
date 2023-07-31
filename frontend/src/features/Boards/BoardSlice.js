@@ -18,7 +18,7 @@ const boardSlice = createSlice({
   },
 });
 
-export const { setBoard, setBoards } = boardSlice.actions;
+export const { setBoard, setBoards, setSearchedBoardTerm } = boardSlice.actions;
 
 export const getAllBoards = (state) => state.boardState.boards;
 export const getCurrentBoard = (state) => state.boardState.board;
