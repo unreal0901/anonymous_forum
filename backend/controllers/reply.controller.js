@@ -14,7 +14,7 @@ module.exports.createReplyHandler = async (req, res, next) => {
     });
 
     let parentReply, parentReplyId;
-    if (req.body.parentReplyId) {
+    if (req.body.parentReplyNumber) {
       parentReply = await Reply.findOne({
         replyNumber: req.body.parentReplyNumber,
       });
@@ -72,7 +72,7 @@ module.exports.getThreadRepliesHandler = async (req, res, next) => {
 
 module.exports.getAllChildRepliesHandler = async (req, res, next) => {
   try {
-    const parentReplyId = req.body.prId;
+    const { parentReplyId } = req.query;
     const childReplies = await getAllChildReplies(parentReplyId);
     res.status(200).json({
       message: `All child fetched for ${parentReplyId}`,

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useGetBoardsQuery } from "../../../services/api/BoardApi";
 import { Link } from "react-router-dom";
-import { compareAsc, formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 import Shimmer from "../../Shimmer/Shimmer";
-import { useSelector } from "react-redux";
-import { getSearchBoard } from "../../../features/Boards/BoardSlice";
+// import { useSelector } from "react-redux";
+// import { getSearchBoard } from "../../../features/Boards/BoardSlice";
 
 const Boards = () => {
   const { data, isLoading, isFetching, isSuccess } = useGetBoardsQuery();

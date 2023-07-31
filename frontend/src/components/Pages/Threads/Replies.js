@@ -5,7 +5,7 @@ import Shimmer from "../../Shimmer/Shimmer";
 import { useGetThreadRepliesQuery } from "../../../services/api/ReplyApi";
 import { useSelector } from "react-redux";
 import { getCurrentThread } from "../../../features/Threads/ThreadSlice";
-import { setReplies } from "../../../features/Replies/ReplySlice";
+// import { setReplies } from "../../../features/Replies/ReplySlice";
 
 const Replies = ({ tid }) => {
   const {

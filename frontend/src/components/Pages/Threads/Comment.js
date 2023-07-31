@@ -12,7 +12,7 @@ import { threadApi } from "../../../services/api/ThreadApi";
 import LoadingScreen from "../../Layout/LoadingScreen";
 import { toast } from "react-toastify";
 
-const Comment = ({ setShowCommentBox, commentBoxRef }) => {
+const Comment = ({ setShowCommentBox, commentBoxRef, currentReply }) => {
   const thread = useSelector(getCurrentThread);
   const [postReply, { isLoading, isError, isSuccess }] =
     usePostThreadReplyMutation();
@@ -34,13 +34,28 @@ const Comment = ({ setShowCommentBox, commentBoxRef }) => {
 
   console.log(name);
 
-  const replyHandler = async () => {
+  const replyHandler = async (e) => {
+    const childReply =
+      textareaRef.current.parentElement.parentElement.parentElement.classList.contains(
+        "reply_box"
+      );
     try {
-      const payload = {
-        user: name,
-        text: reply,
-        threadNumber: thread?.threadNumber,
-      };
+      let payload;
+      if (!childReply) {
+        payload = {
+          user: name,
+          text: reply,
+          threadNumber: thread?.threadNumber,
+        };
+      } else {
+        payload = {
+          user: name,
+          text: reply,
+          threadNumber: thread?.threadNumber,
+          parentReplyNumber: currentReply?.replyNumber,
+        };
+      }
+
       await postReply(payload).unwrap();
       setReply("");
       setEnteredName("");
@@ -156,7 +171,7 @@ const Comment = ({ setShowCommentBox, commentBoxRef }) => {
             </button>
             <button
               type="submit"
-              onClick={replyHandler}
+              onClick={(e) => replyHandler(e)}
               disabled={reply.length === 0}
               className="bg-[#317fb6] text-white px-3 py-1 rounded-2xl disabled:bg-[#c4c4c4] dark:disabled:text-gray-400 dark:hover:text-white"
             >
