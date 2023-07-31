@@ -1,6 +1,6 @@
 ## Deployed
 
-<a href="https://reactjs.org/" title="React"><img src="https://drive.google.com/uc?export=view&id=154DyzBtGMP4PjB_6h6zBQUMlUOJoZexG" alt="React" width="21px" height="21px"></a>/Link: https://www.leakit.netlify.app
+<a href="https://leakit.netlify.app/" title="React"><img src="https://drive.google.com/uc?export=view&id=154DyzBtGMP4PjB_6h6zBQUMlUOJoZexG" alt="React" width="21px" height="21px"></a>/Link: https://leakit.netlify.app/
 
 ## Screenshots
 
