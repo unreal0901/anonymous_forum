@@ -14,12 +14,11 @@
 
 **Client:** <a href="https://reactjs.org/" title="React"><img src="https://github.com/get-icon/geticon/raw/master/icons/react.svg" alt="React" width="21px" height="21px"></a>
 <a href="https://redux.js.org/" title="Redux"><img src="https://github.com/get-icon/geticon/raw/master/icons/redux.svg" alt="Redux" width="21px" height="21px"></a>
-<a href="https://redux-toolkit.js.org/" title="RTK-query"><img src="https://github.com/get-icon/geticon/raw/master/icons/redux.svg" alt="RTK-query" width="21px" height="21px"></a>
 <a href="https://tailwindcss.com/" title="Tailwind CSS"><img src="https://github.com/get-icon/geticon/raw/master/icons/tailwindcss-icon.svg" alt="Tailwind CSS" width="21px" height="21px"></a>
 
 **Server:** <a href="https://nodejs.org/" title="Node.js"><img src="https://github.com/get-icon/geticon/raw/master/icons/nodejs-icon.svg" alt="Node.js" width="21px" height="21px"></a>
 <a href="https://expressjs.com/" title="Express"><img src="https://github.com/get-icon/geticon/raw/master/icons/express.svg" alt="Express" width="21px" height="21px"></a>
-<a href="https://mongoosejs.com/" title="Mongoose"><img src="https://github.com/get-icon/geticon/raw/master/icons/mongoose.svg" alt="Mongoose" width="21px" height="21px"></a>
+<a href="https://mongodb.com/" title="Mongoose"><img src="https://github.com/get-icon/geticon/raw/master/icons/mongodb.svg" alt="Mongodb" width="21px" height="21px"></a>
 
 # Leakit (Anonymous forum app)
 
